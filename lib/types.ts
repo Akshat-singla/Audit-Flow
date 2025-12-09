@@ -30,6 +30,7 @@ export interface DeploymentHistoryEntry {
     abi: any[];
     bytecode: string;
     timestamp: number;
+    auditReport?: SecurityAnalysis; // Optional audit report if AI analysis was enabled
 }
 
 export interface WalletState {

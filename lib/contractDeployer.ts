@@ -40,7 +40,9 @@ export async function ensureNetwork(
  */
 export async function deployContract(
     config: DeploymentConfig,
-    signer: ethers.JsonRpcSigner
+    signer: ethers.JsonRpcSigner,
+    projectId?: string,
+    contractName?: string
 ): Promise<DeploymentResult> {
     const { abi, bytecode, constructorArgs, network } = config;
 
@@ -55,8 +57,11 @@ export async function deployContract(
         // Deploy contract with constructor arguments
         const contract = await factory.deploy(...constructorArgs);
 
+        // Get deployment transaction
+        const deployTx = contract.deploymentTransaction();
+
         // Wait for deployment transaction to be mined
-        const deploymentReceipt = await contract.deploymentTransaction()?.wait();
+        const deploymentReceipt = await deployTx?.wait();
 
         if (!deploymentReceipt) {
             throw new Error('Deployment transaction receipt not available');

@@ -69,7 +69,7 @@ function CodeEditor({
                         resize-none outline-none
                         ${readOnly ? 'cursor-not-allowed opacity-75' : 'cursor-text'}
                     `}
-                    placeholder={readOnly ? '' : '// Enter your Solidity contract code here...\n\npragma solidity ^0.8.0;\n\ncontract MyContract {\n    // Your code\n}'}
+                    placeholder={readOnly ? '' : '// Enter your Solidity contract code here...\n\npragma solidity ^0.8.0;\n\n// enter yoour code}'}
                 />
             </div>
 

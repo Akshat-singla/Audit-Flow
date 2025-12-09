@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "Smart Contract Deployer",
-    description: "Deploy Solidity smart contracts to EVM networks",
+    title: "Audit Flow",
+    description: "Deploy and audit Solidity smart contracts with AI-powered security analysis",
 };
 
 export default function RootLayout({

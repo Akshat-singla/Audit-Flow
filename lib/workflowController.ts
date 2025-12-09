@@ -102,14 +102,21 @@ export class WorkflowController {
             store.updateWorkflowStep(analysisStepIndex, 'completed');
             toastManager.success('Security analysis completed');
 
-            // Automatically proceed to compilation
-            await this.runCompilationStep();
+            // DO NOT automatically proceed - wait for user to review the report
+            // The UI will show the SecurityReport modal and user will decide to fix or continue
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Unknown analysis error';
             store.updateWorkflowStep(analysisStepIndex, 'failed', errorMessage);
             toastManager.error(`Analysis failed: ${errorMessage}`);
             throw error;
         }
+    }
+
+    /**
+     * Continue after security analysis (called when user clicks "Continue" in SecurityReport)
+     */
+    async continueAfterAnalysis(): Promise<void> {
+        await this.runCompilationStep();
     }
 
     /**
@@ -341,6 +348,10 @@ export class WorkflowController {
             // Convert constructor arguments
             const constructorArgs = convertArgumentValues(workflow.constructorArgs);
 
+            // Get project info
+            const state = useStore.getState();
+            const project = state.projects.find(p => p.id === workflow.projectId);
+
             // Deploy contract
             const result = await deployContract(
                 {
@@ -349,7 +360,9 @@ export class WorkflowController {
                     constructorArgs,
                     network: selectedNetwork,
                 },
-                signer
+                signer,
+                workflow.projectId,
+                project?.name
             );
 
             // Store deployment result
@@ -370,6 +383,7 @@ export class WorkflowController {
                     abi: workflow.compilationResult.abi!,
                     bytecode: workflow.compilationResult.bytecode!,
                     timestamp: Date.now(),
+                    auditReport: workflow.analysisResult || undefined, // Include audit report if AI analysis was run
                 });
             } catch (storageError) {
                 // Deployment succeeded but history save failed

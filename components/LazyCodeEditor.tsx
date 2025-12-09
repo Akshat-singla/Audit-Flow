@@ -3,7 +3,7 @@
 import { lazy, Suspense, memo } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 
-const CodeEditor = lazy(() => import('./CodeEditor'));
+const MonacoEditor = lazy(() => import('./MonacoEditor'));
 
 interface LazyCodeEditorProps {
     value: string;
@@ -24,7 +24,7 @@ function LazyCodeEditor(props: LazyCodeEditorProps) {
                 </div>
             }
         >
-            <CodeEditor {...props} />
+            <MonacoEditor {...props} />
         </Suspense>
     );
 }
