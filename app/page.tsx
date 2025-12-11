@@ -118,16 +118,21 @@ export default function HomePage() {
                             <div className="absolute w-[600px] h-[600px] bg-gradient-to-r from-red-600/40 via-purple-600/40 to-blue-600/40 rounded-full blur-3xl" />
                         </div>
 
-                        {/* Rotating Circle */}
+                        {/* Rotating Earth */}
                         <div className="relative w-[500px] h-[500px] animate-spin-wheel z-10">
-                            <Image
-                                src="/images/circle.avif"
-                                alt="Rotating Circle"
-                                width={500}
-                                height={500}
-                                className="w-full h-full object-contain"
-                                priority
-                            />
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src="/images/earth.png"
+                                    alt="Rotating Earth"
+                                    width={500}
+                                    height={500}
+                                    className="w-full h-full object-contain drop-shadow-2xl"
+                                    priority
+                                />
+
+                                {/* Ambient glow */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-transparent to-purple-500/20 blur-3xl -z-10 rounded-full"></div>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
@@ -241,14 +246,23 @@ export default function HomePage() {
                         className="relative h-[600px] flex items-center justify-center"
                     >
                         <div className="relative w-full h-full">
-                            <Image
-                                src="/images/pyramid.png"
-                                alt="3D Pyramid"
-                                width={600}
-                                height={600}
-                                className="object-contain w-full h-full"
-                                priority
-                            />
+                            {/* Enhanced 3D Pyramid with glow effects */}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="relative">
+                                    <Image
+                                        src="/images/pyramid.png"
+                                        alt="3D Pyramid"
+                                        width={600}
+                                        height={600}
+                                        className="object-contain w-full h-full drop-shadow-2xl"
+                                        priority
+                                    />
+                                    {/* Glowing base */}
+                                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-4 bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent blur-sm"></div>
+                                    {/* Ambient glow */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 via-transparent to-purple-500/20 blur-3xl -z-10"></div>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 </div>

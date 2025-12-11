@@ -374,8 +374,8 @@ export class WorkflowController {
             // Save to deployment history
             try {
                 store.addDeployment({
-                    projectId: project.id,
-                    projectName: project.name,
+                    projectId: project?.id || workflow.projectId,
+                    projectName: project?.name || 'Unknown Project',
                     networkId: selectedNetwork.id,
                     networkName: selectedNetwork.name,
                     contractAddress: result.contractAddress,
