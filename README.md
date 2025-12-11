@@ -49,7 +49,6 @@ npm run dev
 ├── app/              # Next.js App Router pages
 ├── components/       # React components
 ├── lib/             # Utility functions and managers
-├── .kiro/           # Kiro spec files
 └── public/          # Static assets
 ```
 
